@@ -37,7 +37,11 @@ public class WorkflowController {
         return taskService.createTaskQuery()
                 .taskAssignee(managerRole)
                 .initializeFormKeys().list().stream().map(
-                TaskDTO::new).collect(Collectors.toList());
+                TaskDTO::new).map(
+                        taskDTO ->{
+                            taskDTO.setTaskVariables(taskService.getVariables(taskDTO.getId()));
+                            return taskDTO;
+                        }).collect(Collectors.toList());
     }
 
     // Complete a task

@@ -9,15 +9,15 @@
         <bpmn:startEvent id="StartEvent_1" name="Start">
             <bpmn:outgoing>Flow_1</bpmn:outgoing>
         </bpmn:startEvent>
-        <bpmn:userTask id="Task_SubmitApplication" name="Submit Loan Application" camunda:assignee="manager">
+        <bpmn:userTask id="Task_SubmitApplication" name="Submit Loan Application" camunda:assignee="MANAGER">
             <bpmn:incoming>Flow_1</bpmn:incoming>
             <bpmn:outgoing>Flow_2</bpmn:outgoing>
         </bpmn:userTask>
-        <bpmn:userTask id="Task_ReviewApplication" name="Review Application" camunda:assignee="sr manager">
+        <bpmn:userTask id="Task_ReviewApplication" name="Review Application" camunda:assignee="SRMANAGER">
             <bpmn:incoming>Flow_2</bpmn:incoming>
             <bpmn:outgoing>Flow_3</bpmn:outgoing>
         </bpmn:userTask>
-        <bpmn:userTask id="Task_ApproveApplication" name="Approve Application" camunda:assignee="sr manager">
+        <bpmn:userTask id="Task_ApproveApplication" name="Approve Application" camunda:assignee="SRMANAGER">
             <bpmn:incoming>Flow_3</bpmn:incoming>
             <bpmn:outgoing>Flow_4</bpmn:outgoing>
         </bpmn:userTask>

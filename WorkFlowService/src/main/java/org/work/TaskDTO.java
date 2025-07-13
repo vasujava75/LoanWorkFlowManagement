@@ -1,12 +1,17 @@
 package org.work;
 
+import jdk.jfr.DataAmount;
 import org.camunda.bpm.engine.task.Task;
+
+import java.util.List;
+import java.util.Map;
 
 public class TaskDTO {
     private String id;
     private String name;
     private String assignee;
-    private String formKey;
+    private  String formKey;
+    private Map<String, Object> taskVariables;
 
     public TaskDTO(Task task) {
         this.id = task.getId();
@@ -43,11 +48,19 @@ public class TaskDTO {
     }
 
     public String getFormKey() {
+
         return formKey;
     }
 
     public void setFormKey(String formKey) {
         this.formKey = formKey;
+    }
+
+    public Map<String, Object> getTaskVariables() {
+        return taskVariables;
+    }
+    public void setTaskVariables(Map<String, Object> taskVariables) {
+        this.taskVariables = taskVariables;
     }
 }
 
