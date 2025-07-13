@@ -5,6 +5,8 @@ import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.work.TaskDTO;
 
@@ -28,11 +30,13 @@ public class WorkflowController {
         ProcessInstance instance = runtimeService.startProcessInstanceByKey("LoanApplicationProcess", variables);
         return ResponseEntity.ok("Started process instance with ID: " + instance.getId());
     }
-
     // Get tasks for a specific user
     @GetMapping("/tasks")
-    public List<TaskDTO> getTasks(@RequestParam String assignee) {
-        return taskService.createTaskQuery().taskAssignee(assignee).initializeFormKeys().list().stream().map(
+    public List<TaskDTO> getTasks() {
+        String managerRole= SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream().findAny().get().toString();
+        return taskService.createTaskQuery()
+                .taskAssignee(managerRole)
+                .initializeFormKeys().list().stream().map(
                 TaskDTO::new).collect(Collectors.toList());
     }
 
